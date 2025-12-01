@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ilmoretto.github.io/SoilBriefDatabase/sitemap.xml
+
+# Disallow temporary files
+Disallow: /*.tmp$
+Disallow: /*.temp$
+Disallow: /node_modules/
+
+# Allow important resources
+Allow: /assets/
+Allow: /index.html
+Allow: /README.md

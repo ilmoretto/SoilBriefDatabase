@@ -222,3 +222,64 @@ a {
         break-after: avoid;
     }
 }
+
+/* ========================================
+   MELHORAMENTOS DE PERFORMANCE
+   ======================================== */
+
+/* Otimização de rendering para elementos que mudam com hover */
+.card-shadow,
+.interactive,
+a {
+    will-change: transform;
+}
+
+/* Aceleração por hardware para elementos animados */
+.section-header::before {
+    transform: translateZ(0);
+}
+
+/* Suavização de fonte para melhor legibilidade */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ========================================
+   ACESSIBILIDADE
+   ======================================== */
+
+/* Foco visível para navegação por teclado */
+a:focus,
+button:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Redução de movimento para usuários que preferem */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .card-shadow {
+        transition: none;
+    }
+    
+    a,
+    .interactive {
+        transition: none;
+    }
+}
+
+/* Alto contraste para melhor acessibilidade */
+@media (prefers-contrast: high) {
+    .card-shadow {
+        border-width: 2px;
+    }
+    
+    .section-header::before {
+        background: #000;
+    }
+}

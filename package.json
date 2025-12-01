@@ -1,0 +1,35 @@
+{
+  "name": "soilbrief-database-docs",
+  "version": "1.0.0",
+  "description": "Documentação técnica do banco de dados db_soil para o Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --host=localhost",
+    "build": "echo 'Projeto estático - sem build necessário'",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "soilbrief",
+    "database",
+    "documentation",
+    "iot",
+    "agriculture",
+    "mysql",
+    "modbus",
+    "sensors"
+  ],
+  "author": "SoilBrief Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "gh-pages": "^6.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilmoretto/SoilBriefDatabase.git"
+  },
+  "homepage": "https://ilmoretto.github.io/SoilBriefDatabase/",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
