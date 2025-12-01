@@ -6,46 +6,6 @@ Documentação técnica completa da estrutura do banco de dados **db_soil** para
 
 Este projeto apresenta a arquitetura, design e funcionalidade do banco de dados que é fundamental para a coleta, armazenamento e análise de dados essenciais para a agricultura de precisão.
 
-## 🏗️ Estrutura do Projeto
-
-```
-SoilBrief/
-├── assets/
-│   ├── css/
-│   │   └── style.css          # Estilos customizados e componentes
-│   └── js/
-│       └── main.js            # JavaScript principal com funcionalidades interativas
-├── index.html                 # Página principal da documentação
-├── bd_soil.html              # Arquivo original (mantido para referência)
-└── README.md                 # Este arquivo
-```
-
-## 🎨 Tecnologias Utilizadas
-
-- **HTML5** - Estrutura semântica e acessibilidade
-- **CSS3** - Estilos customizados e responsividade
-- **JavaScript ES6+** - Interatividade e funcionalidades dinâmicas
-- **Tailwind CSS** - Framework CSS utilitário
-- **Lucide Icons** - Biblioteca de ícones
-- **Google Fonts** - Tipografias Inter e JetBrains Mono
-
-## 📱 Características
-
-### Design e UX
-- ✅ Design responsivo mobile-first
-- ✅ Navegação suave entre seções
-- ✅ Menu mobile com overlay
-- ✅ Tema moderno com modo claro
-- ✅ Tipografia otimizada para legibilidade
-- ✅ Ícones consistentes e intuitivos
-
-### Funcionalidades
-- ✅ Navegação sticky com indicador de seção ativa
-- ✅ Scroll suave com offset para navegação
-- ✅ Menu mobile responsivo
-- ✅ Intersection Observer para rastreamento de seções
-- ✅ Otimização de performance
-- ✅ Acessibilidade WCAG
 
 ### Conteúdo Técnico
 - ✅ Arquitetura completa do banco de dados
@@ -55,25 +15,6 @@ SoilBrief/
 - ✅ Diagramas de relacionamento
 - ✅ Exemplos de implementação
 
-## 🚀 Como Usar
-
-### Visualização Local
-
-1. Clone o repositório:
-```bash
-git clone https://github.com/ilmoretto/SoilBriefDatabase.git
-cd SoilBriefDatabase
-```
-
-2. Abra o arquivo `index.html` em um navegador web moderno
-
-### Hospedagem
-
-O projeto pode ser facilmente hospedado em qualquer serviço de hosting estático:
-- GitHub Pages
-- Netlify
-- Vercel
-- Firebase Hosting
 
 ## 📊 Estrutura do Banco de Dados
 
@@ -92,24 +33,6 @@ O projeto pode ser facilmente hospedado em qualquer serviço de hosting estátic
 - Constraints de integridade
 - Suporte a múltiplos tipos de sensores
 - Escalabilidade horizontal
-
-## 🔧 Customização
-
-### CSS
-O arquivo `assets/css/style.css` contém:
-- Variáveis CSS customizáveis
-- Componentes modulares
-- Media queries responsivas
-- Animações e transições
-- Suporte a modo escuro (preparado)
-
-### JavaScript
-O arquivo `assets/js/main.js` inclui:
-- Arquitetura modular
-- Event listeners otimizados
-- Gestão de estado
-- Utilitários de performance
-- API extensível
 
 ## 📄 Seções da Documentação
 
@@ -153,7 +76,7 @@ Este projeto de documentação está disponível sob licença MIT.
 
 ## 📞 Contato
 
-- **Equipe SoilBrief** - [soilbrief@ifro.edu.br](mailto:soilbrief@ifro.edu.br)
+- **Equipe SoilBrief** - [morete.alencar@estudante.ifro.edu.br](mailto:morete.alencar@estudante.ifro.edu.br)
 - **GitHub** - [ilmoretto/SoilBriefDatabase](https://github.com/ilmoretto/SoilBriefDatabase)
 
 ---
