@@ -8,6 +8,29 @@
  */
 
 /* ========================================
+   FORÇAR TEMA CLARO GLOBAL
+   ======================================== */
+
+/* Garantir que o projeto sempre use tema claro */
+html {
+    color-scheme: light only;
+}
+
+html,
+body {
+    color-scheme: light;
+    background-color: #f9fafb !important;
+    color: #374151 !important;
+}
+
+/* Forçar tema claro em todos os elementos */
+*,
+*::before,
+*::after {
+    color-scheme: light;
+}
+
+/* ========================================
    VARIÁVEIS DE CORES - PERFIL SOILBRIEF
    ======================================== */
 
@@ -50,11 +73,17 @@
    CONFIGURAÇÕES GLOBAIS E RESET
    ======================================== */
 
+/* Forçar esquema de cores claro */
+:root {
+    color-scheme: light;
+}
+
 /* Configuração da fonte principal */
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-bg-base);
     color: var(--color-text-secondary);
+    color-scheme: light;
 }
 
 /* Configuração de títulos */
@@ -246,18 +275,71 @@ a {
    MODO ESCURO (OPCIONAL)
    ======================================== */
 
+/* Desabilitar modo escuro automático do navegador */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-primary: #0f172a;
-        --bg-secondary: #1e293b;
-        --text-primary: #e2e8f0;
-        --text-secondary: #94a3b8;
+        color-scheme: light;
     }
     
-    /* Aplicar apenas se não houver classe específica de tema */
-    body:not(.theme-light) {
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
+    /* Forçar fundo claro em todos os elementos principais */
+    body,
+    html {
+        background-color: var(--color-bg-base) !important;
+        color: var(--color-text-secondary) !important;
+    }
+    
+    /* Forçar cores em elementos que podem ser afetados */
+    nav,
+    header,
+    main,
+    footer,
+    section,
+    article,
+    div,
+    .bg-white {
+        background-color: inherit;
+        color: inherit;
+    }
+    
+    /* Garantir que cards mantenham fundo branco */
+    .card-shadow,
+    .bg-white {
+        background-color: #ffffff !important;
+    }
+    
+    /* Garantir cores de texto corretas */
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--color-text-primary) !important;
+    }
+    
+    p, span, div {
+        color: inherit;
+    }
+    
+    /* Garantir que inputs e formulários mantenham aparência clara */
+    input,
+    textarea,
+    select,
+    button {
+        color-scheme: light;
+        background-color: #ffffff;
+        color: var(--color-text-secondary);
+        border-color: var(--color-border);
+    }
+    
+    /* Sobrescrever scrollbar escura */
+    ::-webkit-scrollbar {
+        background-color: var(--color-bg-base);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-text-placeholder);
+    }
+    
+    /* Garantir que pré e code mantenham fundo claro */
+    pre,
+    code {
+        color-scheme: light;
     }
 }
 
@@ -312,6 +394,58 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+}
+
+/* Forçar cores específicas em elementos importantes */
+* {
+    color-scheme: light;
+}
+
+nav,
+header,
+footer {
+    background-color: #ffffff;
+    color: var(--color-text-secondary);
+}
+
+main {
+    background-color: var(--color-bg-base);
+}
+
+.bg-white {
+    background-color: #ffffff !important;
+}
+
+.bg-gray-50 {
+    background-color: #f9fafb !important;
+}
+
+/* Forçar cores de texto específicas */
+.text-gray-900,
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary) !important;
+}
+
+.text-gray-700 {
+    color: var(--color-text-secondary) !important;
+}
+
+.text-gray-600 {
+    color: var(--color-text-secondary) !important;
+}
+
+.text-gray-500 {
+    color: var(--color-text-tertiary) !important;
+}
+
+.text-gray-400 {
+    color: var(--color-text-placeholder) !important;
+}
+
+/* Forçar bordas claras */
+.border-gray-200,
+.border-gray-100 {
+    border-color: var(--color-border) !important;
 }
 
 /* ========================================
