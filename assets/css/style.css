@@ -1,0 +1,224 @@
+/**
+ * SoilBrief Database Documentation - Main Stylesheet
+ * Arquivo CSS principal para o relatório técnico do banco de dados db_soil
+ * 
+ * @version 1.0.0
+ * @author SoilBrief Team
+ * @date 2025
+ */
+
+/* ========================================
+   CONFIGURAÇÕES GLOBAIS E RESET
+   ======================================== */
+
+/* Configuração da fonte principal */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #334155;
+}
+
+/* Configuração de títulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #0f172a;
+}
+
+/* Fonte monoespaçada para código */
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Configuração de navegação suave */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* 64px navbar + 16px margin */
+}
+
+section[id] {
+    scroll-margin-top: 80px;
+}
+
+/* ========================================
+   COMPONENTES DE LAYOUT
+   ======================================== */
+
+/* Header de seção com borda lateral */
+.section-header {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.section-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 4px;
+    background: #2563eb;
+    border-radius: 2px;
+}
+
+/* ========================================
+   COMPONENTES DE CARTÃO
+   ======================================== */
+
+/* Cartão com sombra e efeito hover */
+.card-shadow {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-shadow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+/* ========================================
+   COMPONENTES DE BADGE E PILL
+   ======================================== */
+
+/* Badge para tecnologias */
+.tech-badge {
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    border: 1px solid #e2e8f0;
+}
+
+/* Componente pill para status/tags */
+.pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* ========================================
+   MEDIA QUERIES RESPONSIVAS
+   ======================================== */
+
+/* Tablet e desktop */
+@media (min-width: 768px) {
+    .section-header {
+        padding-left: 2rem;
+    }
+    
+    .section-header::before {
+        width: 6px;
+    }
+}
+
+/* Desktop grande */
+@media (min-width: 1024px) {
+    .card-shadow:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+}
+
+/* ========================================
+   UTILITÁRIOS DE COR E ESTADO
+   ======================================== */
+
+/* Estados de cor para pills */
+.pill.status-primary {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.pill.status-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.pill.status-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.pill.status-danger {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+/* ========================================
+   ANIMAÇÕES E TRANSIÇÕES
+   ======================================== */
+
+/* Transição suave para links */
+a {
+    transition: color 0.15s ease-in-out;
+}
+
+/* Transição para elementos interativos */
+.interactive {
+    transition: all 0.2s ease-in-out;
+}
+
+.interactive:hover {
+    transform: scale(1.02);
+}
+
+/* ========================================
+   MODO ESCURO (OPCIONAL)
+   ======================================== */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #0f172a;
+        --bg-secondary: #1e293b;
+        --text-primary: #e2e8f0;
+        --text-secondary: #94a3b8;
+    }
+    
+    /* Aplicar apenas se não houver classe específica de tema */
+    body:not(.theme-light) {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+    }
+}
+
+/* ========================================
+   IMPRESSÃO
+   ======================================== */
+
+@media print {
+    .card-shadow {
+        box-shadow: none !important;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .section-header::before {
+        background: #6b7280 !important;
+    }
+    
+    /* Ocultar elementos desnecessários na impressão */
+    nav,
+    footer {
+        display: none !important;
+    }
+    
+    /* Garantir quebras de página apropriadas */
+    section {
+        break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+        break-after: avoid;
+    }
+}

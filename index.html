@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Técnico: db_soil</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%232563eb' viewBox='0 0 24 24'%3e%3cpath d='M12 2L2 7v10c0 5.55 3.84 9.74 9 10.79C16.16 26.74 20 22.55 20 17V7l-10-5z'/%3e%3c/svg%3e">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Documentação técnica completa da estrutura do banco de dados db_soil para o Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT.">
+    <meta name="keywords" content="SoilBrief, banco de dados, IoT, agricultura de precisão, MySQL, documentação técnica">
+    <meta name="author" content="SoilBrief Team">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Relatório Técnico: db_soil - SoilBrief">
+    <meta property="og:description" content="Documentação da arquitetura, design e funcionalidade do Soil Brief - Sistema Integrado de Monitoramento de Fertilidade do Solo.">
+    <meta property="og:type" content="website">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 bg-opacity-95 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="database" class="text-blue-600 h-6 w-6"></i>
+                    <span class="font-bold text-xl tracking-tight text-gray-900">db_soil<span class="text-gray-400 font-light">.docs</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#intro" class="text-gray-600 hover:text-blue-600 transition">Introdução</a>
+                    <a href="#entidades" class="text-gray-600 hover:text-blue-600 transition">Modelo de Dados</a>
+                    <a href="#monitoramento" class="text-gray-600 hover:text-blue-600 transition">Monitoramento</a>
+                    <a href="#historico" class="text-gray-600 hover:text-blue-600 transition">Análise Histórica</a>
+                    <a href="#ddl" class="text-gray-600 hover:text-blue-600 transition">DDL</a>
+                    <a href="#fluxo-iot" class="text-gray-600 hover:text-blue-600 transition">Uso/IoT</a>
+                    <a href="#consultas" class="text-gray-600 hover:text-blue-600 transition">Consultas</a>
+                    <a href="#relacoes" class="text-gray-600 hover:text-blue-600 transition">Relações</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-toggle" aria-label="Abrir menu">
+                        <i data-lucide="menu" class="text-gray-600 h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-6">
+                    <i data-lucide="file-text" class="w-3 h-3"></i>
+                    Relatório Técnico
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    Estrutura do Banco de Dados <span class="text-blue-600">db_soil</span>
+                </h1>
+                <p class="text-xl text-gray-500 leading-relaxed mb-8">
+                    Documentação da arquitetura, design e funcionalidade do Soil Brief - Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT e Aplicação Móvel.
+                </p>
+                <div class="flex gap-4 text-sm text-gray-500 border-t border-gray-100 pt-6">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="layout-template" class="w-4 h-4"></i>
+                        <span>Arquitetura Relacional</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="server" class="w-4 h-4"></i>
+                        <span>Soil Brief IoT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+        
+        <!-- Introdução -->
+        <section id="intro" class="grid md:grid-cols-3 gap-12">
+            <div class="md:col-span-1">
+                <div class="section-header">
+                    <h2 class="text-2xl font-bold">1. Introdução à Arquitetura de Dados</h2>
+                </div>
+                <p class="text-sm text-gray-500">Visão geral do propósito e escopo do banco de dados.</p>
+            </div>
+            <div class="md:col-span-2 prose prose-blue text-gray-600">
+                <p>Este documento tem como objetivo apresentar a arquitetura, o design e a funcionalidade do banco de dados <strong>db_soil</strong>. Concebido para ser a espinha dorsal do Soil Brief - Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT e Aplicação Móvel, sua estrutura é fundamental para a coleta, o armazenamento e a análise de dados essenciais para a agricultura de precisão.</p>
+                <p>O objetivo central do banco de dados é armazenar e gerenciar, de forma integrada, informações de usuários, propriedades rurais, tipos de cultura, leituras de sensores de solo e registros históricos para análise.</p>
+            </div>
+        </section>
+
+        <!-- Modelo de Dados -->
+        <section id="entidades">
+            <div class="section-header mb-8">
+                <h2 class="text-2xl font-bold">2. Visão Geral do Modelo de Dados e Entidades Principais</h2>
+                <p class="text-gray-500 mt-2">Para compreender o funcionamento do Soil Brief, é crucial entender suas entidades centrais que refletem o mundo real.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl p-8 border border-gray-200 card-shadow h-full">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <span class="tech-badge">Tabela: Usuario</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Controle de Acesso</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Responsável por armazenar as informações de acesso dos usuários do sistema. Centraliza os dados de identificação e autenticação de cada indivíduo autorizado a interagir com a plataforma.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center justify-between border-b border-gray-50 pb-2">
+                            <span class="font-mono text-gray-800">id</span>
+                            <span class="text-xs text-gray-400">Chave Primária (PK)</span>
+                        </li>
+                        <li class="flex items-center justify-between border-b border-gray-50 pb-2">
+                            <span class="font-mono text-gray-800">email</span>
+                            <span class="text-xs text-gray-400">Identificador único</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="font-mono text-gray-800">senha_hash</span>
+                            <span class="text-xs text-gray-400">Criptografado</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 border border-gray-200 card-shadow h-full">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                            <i data-lucide="map-pin" class="w-6 h-6"></i>
+                        </div>
+                        <span class="tech-badge">Tabela: Propriedade</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Vínculo Rural</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Esta entidade estabelece o vínculo entre uma propriedade rural e seu respectivo dono. Ao associar cada propriedade a um registro na tabela Usuario, ela define a relação de um-para-muitos, garantindo que os dados de uma fazenda sejam corretamente associados ao seu gestor.</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center justify-between border-b border-gray-50 pb-2">
+                            <span class="font-mono text-gray-800">id</span>
+                            <span class="text-xs text-gray-400">Chave Primária (PK)</span>
+                        </li>
+                        <li class="flex items-center justify-between">
+                            <span class="font-mono text-gray-800">usuario_id</span>
+                            <span class="text-xs text-indigo-500 font-medium">Chave Estrangeira (FK)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monitoramento -->
+        <section id="monitoramento">
+            <div class="section-header mb-8">
+                <h2 class="text-2xl font-bold">3. Estrutura de Monitoramento e Análise de Dados</h2>
+                <p class="text-gray-500 mt-2">O núcleo do sistema db_soil reside em suas entidades de monitoramento, capturando dados em tempo real e permitindo análises históricas.</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg border border-gray-200 card-shadow h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="book-open" class="text-amber-500 w-5 h-5"></i>
+                        <h4 class="font-bold text-gray-900">1. Tabela Cultura</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Funciona como uma tabela de referência, armazenando os parâmetros nutricionais e ambientais considerados ideais para diversos tipos de culturas agrícolas, baseados em referenciais da Embrapa.</p>
+                    <div class="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600">
+                        nitrogenio, fosforo, potassio, umidade, temperatura
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg border-l-4 border-l-green-500 border-y border-r border-gray-200 card-shadow relative h-full">
+                    <div class="absolute top-0 right-0 px-2 py-1 bg-green-100 text-green-700 text-[10px] font-bold uppercase rounded-bl">
+                        Core
+                    </div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="layers" class="text-green-600 w-5 h-5"></i>
+                        <h4 class="font-bold text-gray-900">2. Tabela Solo</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Esta é a entidade central do processo de monitoramento. Ela armazena as leituras atuais dos nutrientes e das condições de uma área de solo específica. Suas chaves estrangeiras contextualizam os dados. Extensibilidade para pH, condutividade, salinidade e TDS conforme tipo de sensor.</p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between">
+                            <span>identificacao</span>
+                            <span class="text-gray-400">Ex: "Lote 4-Norte"</span>
+                        </div>
+                        <div class="flex justify-between text-indigo-600">
+                            <span>cultura_id (FK)</span>
+                            <span>→ Cultura</span>
+                        </div>
+                        <div class="flex justify-between text-emerald-600">
+                            <span>propriedade_id (FK)</span>
+                            <span>→ Propriedade</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-2">
+                            Campo identificação: identificador legível por humanos (ex: "Lote 4-Norte") para distinguir diferentes áreas dentro da propriedade
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg border border-gray-200 card-shadow h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="cpu" class="text-slate-500 w-5 h-5"></i>
+                        <h4 class="font-bold text-gray-900">3. Tabela Sensor</h4>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Esta tabela estabelece o vínculo fundamental entre o mundo físico e o sistema lógico. Ela associa um dispositivo de hardware a uma área de solo específica monitorada.</p>
+                    <div class="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600">
+                        id_sensor: identificador único do dispositivo físico (endereço Modbus 1-255)<br>
+                        solo_id (FK): conecta sensor a área de solo<br>
+                        <span class="text-blue-600">Protocolos suportados:</span> Modbus RTU RS-485, registros KEEP
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Análise Histórica -->
+        <section id="historico" class="bg-slate-900 rounded-2xl p-8 md:p-12 text-white overflow-hidden relative">
+            <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-slate-800 rounded-full opacity-50 blur-3xl"></div>
+            <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-blue-400 mb-4 font-mono text-sm">
+                        <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                        4. Análise Histórica
+                    </div>
+                    <h3 class="text-3xl font-bold mb-4">Tabela Historico</h3>
+                    <p class="text-slate-300 mb-6 leading-relaxed">Funciona como um repositório de dados agregados, otimizado para a análise de tendências ao longo do tempo. Consultar médias diárias pré-calculadas é ordens de magnitude mais rápido que calcular dinamicamente.</p>
+                    <div class="bg-slate-800 bg-opacity-50 p-4 rounded-lg border border-slate-700">
+                        <h4 class="text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-green-400"></i>
+                            Restrição Crítica
+                        </h4>
+                        <p class="text-xs text-slate-400 font-mono">UNIQUE KEY unique_date_solo (data, solo_id)</p>
+                        <p class="text-xs text-slate-400 mt-1">Garante a integridade referencial ao impedir a inserção de mais de um registro de média diária para o mesmo solo no mesmo dia.</p>
+                    </div>
+                </div>
+                <div class="bg-white text-slate-900 rounded-lg p-6 shadow-xl font-mono text-xs">
+                    <div class="flex border-b border-gray-100 pb-2 mb-2 font-bold text-gray-400 uppercase">
+                        <div class="w-1/3">Coluna</div>
+                        <div class="w-2/3">Função</div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold text-indigo-600">data</div>
+                            <div class="w-2/3 text-gray-600">Referência temporal</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold">nitrogenio_medio</div>
+                            <div class="w-2/3 text-gray-600">Média diária de N</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold">fosforo_medio</div>
+                            <div class="w-2/3 text-gray-600">Média diária de P</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold">potassio_medio</div>
+                            <div class="w-2/3 text-gray-600">Média diária de K</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold">umidade_media</div>
+                            <div class="w-2/3 text-gray-600">Média diária de umidade</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold">temperatura_media</div>
+                            <div class="w-2/3 text-gray-600">Média diária de temperatura</div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 font-semibold text-orange-600">quantidade_leituras</div>
+                            <div class="w-2/3 text-gray-600">Indica o número de medições brutas que compõem a média. Serve como indicador de saúde do sensor.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DDL -->
+        <section id="ddl" class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <div class="section-header mb-8">
+                <h2 class="text-2xl font-bold">5. Esquemas das Tabelas (DDL)</h2>
+                <p class="text-gray-500 mt-2">Visualização otimizada com base no script de criação do banco.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Tabelas DDL aqui - conteúdo abreviado para exemplo -->
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="user-round" class="w-5 h-5 text-indigo-600"></i>
+                            <h4 class="font-bold text-gray-900">Usuario</h4>
+                        </div>
+                        <span class="tech-badge">PK: id</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Credenciais e identidade de usuários autorizados.</p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>nome</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(255)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>email</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(255)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>senha_hash</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(255)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Outras tabelas DDL... -->
+            </div>
+        </section>
+
+        <!-- Fluxo IoT -->
+        <section id="fluxo-iot" class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+            <div class="section-header mb-8">
+                <h2 class="text-2xl font-bold">6. Uso do Banco de Dados na Arquitetura IoT</h2>
+                <p class="text-gray-500 mt-2">Integração hardware → API → MySQL → App (conforme Relatório Técnico IoT).</p>
+            </div>
+            <!-- Conteúdo do fluxo IoT... -->
+        </section>
+
+        <!-- Consultas -->
+        <section id="consultas" class="border border-gray-200 rounded-2xl p-8 bg-white shadow-sm">
+            <div class="section-header mb-6">
+                <h2 class="text-2xl font-bold">7. Consultas SQL e Visualização</h2>
+                <p class="text-gray-500 mt-2">Exemplos de consultas e pré-visualização com dados de povoamento.</p>
+            </div>
+            <!-- Conteúdo das consultas... -->
+        </section>
+
+        <!-- Relações -->
+        <section id="relacoes">
+            <div class="section-header mb-8">
+                <h2 class="text-2xl font-bold">8. Relações e Fluxo de Dados</h2>
+                <p class="text-gray-500 mt-2">A força de um banco de dados relacional reside nas conexões lógicas entre suas tabelas, implementadas através de chaves estrangeiras.</p>
+            </div>
+            <!-- Conteúdo das relações... -->
+        </section>
+
+        <!-- Conclusão -->
+        <section id="conclusao" class="bg-gray-900 rounded-xl p-8 text-gray-300">
+            <div class="flex items-center gap-3 mb-6 border-b border-gray-800 pb-4">
+                <i data-lucide="check-circle" class="text-green-500 w-6 h-6"></i>
+                <h2 class="text-2xl font-bold text-white">9. Conclusão</h2>
+            </div>
+            <div class="prose prose-invert max-w-none">
+                <p>A estrutura do banco de dados <strong>db_soil</strong> foi cuidadosamente projetada para atender às demandas do Soil Brief - Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT e Aplicação Móvel. Sua finalidade principal é fornecer uma base de dados robusta, organizada e relacional, capaz de suportar operações de agricultura de precisão.</p>
+                <p>A arquitetura de dados segmentada, que promove uma clara separação entre dados operacionais atuais (Solo) e agregados analíticos (Historico), juntamente com o uso estratégico de tabelas de referência (Cultura), capacita o sistema a oferecer não apenas monitoramento em tempo real, mas também análises de longo prazo, essenciais para a otimização de recursos e o aumento da produtividade agrícola.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="database" class="text-gray-400 w-5 h-5"></i>
+                <span class="font-bold text-gray-700">db_soil</span>
+            </div>
+            <p class="text-sm text-gray-500">Documentação Técnica Gerada em 2025</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Inicializar ícones do Lucide
+        lucide.createIcons();
+    </script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
