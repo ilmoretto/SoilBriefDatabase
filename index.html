@@ -52,7 +52,7 @@
                     <a href="#relacoes" class="text-gray-600 hover:text-blue-600 transition">Relações</a>
                 </div>
                 <div class="md:hidden">
-                    <button class="mobile-menu-toggle" aria-label="Abrir menu">
+                    <button class="mobile-menu-toggle" aria-label="Abrir menu" onclick="SoilBriefApp.toggleMobileMenu()">
                         <i data-lucide="menu" class="text-gray-600 h-6 w-6"></i>
                     </button>
                 </div>
@@ -284,7 +284,6 @@
                 <p class="text-gray-500 mt-2">Visualização otimizada com base no script de criação do banco.</p>
             </div>
             <div class="grid lg:grid-cols-2 gap-6">
-                <!-- Tabelas DDL aqui - conteúdo abreviado para exemplo -->
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
@@ -313,7 +312,190 @@
                         </div>
                     </div>
                 </div>
-                <!-- Outras tabelas DDL... -->
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="map" class="w-5 h-5 text-emerald-600"></i>
+                            <h4 class="font-bold text-gray-900">Propriedade</h4>
+                        </div>
+                        <span class="tech-badge">FK → Usuario</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Vínculo entre a fazenda e o usuário dono.</p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>nome</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(255)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>usuario_id</span>
+                            <span class="pill bg-indigo-100 text-indigo-700">int FK not null</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="sprout" class="w-5 h-5 text-amber-600"></i>
+                            <h4 class="font-bold text-gray-900">Cultura</h4>
+                        </div>
+                        <span class="tech-badge">Referências NPK</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Valores ideais (Embrapa) para diagnóstico por cultura.</p>
+                    <div class="grid grid-cols-2 text-xs font-mono gap-2">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>nome</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(255)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>nitrogenio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>fosforo</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>potassio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>umidade</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between col-span-2">
+                            <span>temperatura</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="layers" class="w-5 h-5 text-green-600"></i>
+                            <h4 class="font-bold text-gray-900">Solo</h4>
+                        </div>
+                        <span class="tech-badge">FK → Cultura / Propriedade</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Leituras atuais por área; pode existir sem cultura (pousio).</p>
+                    <div class="grid grid-cols-2 text-xs font-mono gap-2">
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2 col-span-2">
+                            <span>identificacao</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(50)</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>nitrogenio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>fosforo</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>potassio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>umidade</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>temperatura</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>cultura_id</span>
+                            <span class="pill bg-amber-100 text-amber-700">int FK null</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>propriedade_id</span>
+                            <span class="pill bg-indigo-100 text-indigo-700">int FK not null</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="cpu" class="w-5 h-5 text-slate-600"></i>
+                            <h4 class="font-bold text-gray-900">Sensor</h4>
+                        </div>
+                        <span class="tech-badge">FK → Solo</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Mapeia dispositivos físicos aos solos monitorados.</p>
+                    <div class="space-y-2 text-xs font-mono">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id_sensor</span>
+                            <span class="pill bg-gray-100 text-gray-700">varchar(10)</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>solo_id</span>
+                            <span class="pill bg-indigo-100 text-indigo-700">int FK</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 card-shadow lg:col-span-2 h-full">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="history" class="w-5 h-5 text-purple-600"></i>
+                            <h4 class="font-bold text-gray-900">Historico</h4>
+                        </div>
+                        <span class="tech-badge">UNIQUE (data, solo_id)</span>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Médias diárias consolidadas por solo; garante unicidade por dia.</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 text-xs font-mono gap-2">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>id</span>
+                            <span class="pill bg-blue-100 text-blue-700">int PK AI</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>data</span>
+                            <span class="pill bg-gray-100 text-gray-700">date not null</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>nitrogenio_medio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>fosforo_medio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>potassio_medio</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>umidade_media</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>temperatura_media</span>
+                            <span class="pill bg-gray-100 text-gray-700">double</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span>quantidade_leituras</span>
+                            <span class="pill bg-gray-100 text-gray-700">int not null</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>solo_id</span>
+                            <span class="pill bg-indigo-100 text-indigo-700">int FK not null</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -323,7 +505,153 @@
                 <h2 class="text-2xl font-bold">6. Uso do Banco de Dados na Arquitetura IoT</h2>
                 <p class="text-gray-500 mt-2">Integração hardware → API → MySQL → App (conforme Relatório Técnico IoT).</p>
             </div>
-            <!-- Conteúdo do fluxo IoT... -->
+
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <h3 class="text-lg font-bold text-blue-900 mb-4 flex items-center gap-2">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                    Tipos de Sensores Suportados pelo Sistema
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white p-4 rounded border">
+                        <h4 class="font-semibold text-gray-800 mb-2">NPK Básico</h4>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>Nitrogênio (N) - Reg 31</li>
+                            <li>Fósforo (P) - Reg 32</li>
+                            <li>Potássio (K) - Reg 33</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded border">
+                        <h4 class="font-semibold text-gray-800 mb-2">TH & TH-EC</h4>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>Umidade - Reg 1 (x0.1)</li>
+                            <li>Temperatura - Reg 2 (x0.1)</li>
+                            <li>Condutividade - Reg 3</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-4 rounded border">
+                        <h4 class="font-semibold text-gray-800 mb-2">Multi-Parâmetros</h4>
+                        <ul class="text-xs text-gray-600 space-y-1">
+                            <li>pH - Reg 4 (x0.1)</li>
+                            <li>Salinidade - Reg 8</li>
+                            <li>TDS - Reg 9</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-xs text-blue-700 mt-3">
+                    <strong>Observação:</strong> Todos os sensores utilizam protocolo Modbus RTU com endereços configuráveis (1-255) e fatores de calibração personalizados.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 mt-8">
+                <h4 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                    <i data-lucide="code" class="w-4 h-4 text-slate-700"></i>
+                    Especificações Técnicas de Comunicação
+                </h4>
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <div class="bg-white border border-gray-200 rounded-lg p-4">
+                        <h5 class="font-semibold text-gray-700 mb-3">Registros Modbus (Exemplos)</h5>
+                        <div class="text-xs font-mono space-y-1 text-gray-600">
+                            <div class="flex justify-between">
+                                <span>NPK Nitrogen:</span>
+                                <span class="text-blue-600">Reg 31 (Signed)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Humidity:</span>
+                                <span class="text-green-600">Reg 1 (Signed x0.1)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Temperature:</span>
+                                <span class="text-red-600">Reg 2 (Signed x0.1)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>pH:</span>
+                                <span class="text-purple-600">Reg 4 (Signed x0.1)</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Conductivity:</span>
+                                <span class="text-yellow-600">Reg 3 (Signed)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-4">
+                        <h5 class="font-semibold text-gray-700 mb-3">Payload JSON (API)</h5>
+                        <pre class="text-xs bg-slate-800 text-slate-200 p-3 rounded overflow-x-auto">{
+  "sensorId": "NPK_001",
+  "timestamp": "2025-01-15T14:30:00Z",
+  "soloId": 1,
+  "leituras": {
+    "nitrogenio": 45.5,
+    "fosforo": 28.3,
+    "potassio": 180.2,
+    "umidade": 70.5,
+    "temperatura": 24.8,
+    "ph": 6.2,
+    "condutividade": 1250
+  }
+}</pre>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-600 mt-3">
+                    <strong>Nota:</strong> Valores com fator de escala (x0.1) são automaticamente convertidos pela API antes da persistência no banco.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-lg h-full">
+                    <div class="flex items-center gap-2 text-slate-700 font-semibold mb-2">
+                        <i data-lucide="box" class="w-4 h-4"></i>
+                        Camada de Percepção
+                    </div>
+                    <p class="text-sm text-slate-600">Arduino Uno + Sensores multi-parâmetro via Modbus RS-485 (MAX485). Suporte a NPK, pH, condutividade, salinidade e TDS. Leituras a cada 15 minutos.</p>
+                </div>
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-lg h-full">
+                    <div class="flex items-center gap-2 text-slate-700 font-semibold mb-2">
+                        <i data-lucide="wifi" class="w-4 h-4"></i>
+                        Rede & Middleware
+                    </div>
+                    <p class="text-sm text-slate-600">ESP8266 publica via HTTP/REST (POST JSON). API .NET do Soil Brief valida e persiste no MySQL; taxa de sucesso > 90%.</p>
+                </div>
+                <div class="p-5 bg-slate-50 border border-slate-200 rounded-lg h-full">
+                    <div class="flex items-center gap-2 text-slate-700 font-semibold mb-2">
+                        <i data-lucide="smartphone" class="w-4 h-4"></i>
+                        Aplicação Móvel Soil Brief
+                    </div>
+                    <p class="text-sm text-slate-600">Consome API via GET para dashboards com semáforo (verde/amarelo/vermelho) por cultura.</p>
+                </div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+                <div class="bg-slate-900 text-slate-100 rounded-xl p-6">
+                    <h4 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                        <i data-lucide="workflow" class="w-4 h-4 text-blue-300"></i>
+                        Fluxo resumido (dados → diagnóstico)
+                    </h4>
+                    <pre class="bg-slate-800 text-slate-200 p-4 rounded-lg text-xs font-mono leading-6 overflow-x-auto">Sensores Multi-parâmetro (NPK, pH, TH, EC)
+  → Modbus RTU RS-485 (endereços 1-255)
+  → MAX485 (conversão RS-485/TTL)
+Arduino Uno (mestre Modbus)
+  → Serial TX/RX (9600-115200 baud)
+ESP8266 (Wi-Fi + HTTP client)
+  → HTTP POST JSON (payload estruturado)
+API .NET (validação + regras de negócio)
+  → INSERT/UPDATE (Solo + Historico)
+MySQL 8.0+ (ACID + índices otimizados)
+  → GET /diagnostico (comparação culturas)
+Soil Brief App React Native (dashboard responsivo)</pre>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-6">
+                    <h4 class="text-lg font-semibold mb-3 flex items-center gap-2">
+                        <i data-lucide="list-checks" class="w-4 h-4 text-emerald-500"></i>
+                        Pontos críticos do banco
+                    </h4>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li><strong>Integridade:</strong> FKs em Solo (propriedade_id, cultura_id opcional) e Historico (solo_id).</li>
+                        <li><strong>Unicidade diária:</strong> UNIQUE (data, solo_id) na Historico evita médias duplicadas.</li>
+                        <li><strong>Latência:</strong> Resposta &lt; 2s no app após POST/GET.</li>
+                        <li><strong>Diagnóstico:</strong> API compara leituras com tabela Cultura (RF9) e retorna status ao app.</li>
+                        <li><strong>Escalabilidade:</strong> Suporte a múltiplos tipos de sensor via id_sensor com endereçamento Modbus flexível.</li>
+                        <li><strong>Calibração:</strong> Fatores de correção armazenados nos próprios sensores (registros 35-37, 1257-1279).</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <!-- Consultas -->
@@ -332,7 +660,81 @@
                 <h2 class="text-2xl font-bold">7. Consultas SQL e Visualização</h2>
                 <p class="text-gray-500 mt-2">Exemplos de consultas e pré-visualização com dados de povoamento.</p>
             </div>
-            <!-- Conteúdo das consultas... -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 h-full">
+                    <h4 class="font-semibold text-gray-800 mb-3">Médias diárias por propriedade e cultura</h4>
+                    <pre class="text-xs font-mono text-gray-800 overflow-x-auto bg-white border border-gray-200 rounded p-3">SELECT p.id   AS propriedade,
+       s.identificacao,
+       c.nome AS cultura,
+       h.data,
+       h.nitrogenio_medio,
+       h.fosforo_medio,
+       h.potassio_medio,
+       h.umidade_media,
+       h.temperatura_media,
+       h.quantidade_leituras
+FROM historico h
+JOIN solo s         ON s.id = h.solo_id
+JOIN propriedade p  ON p.id = s.propriedade_id
+LEFT JOIN cultura c ON c.id = s.cultura_id
+WHERE h.data BETWEEN '2025-01-01' AND '2025-01-31'
+ORDER BY p.id, s.identificacao, h.data;</pre>
+                </div>
+                <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 h-full">
+                    <h4 class="font-semibold text-gray-800 mb-3">Diagnóstico comparando com referência da cultura</h4>
+                    <pre class="text-xs font-mono text-gray-800 overflow-x-auto bg-white border border-gray-200 rounded p-3">SELECT s.identificacao,
+       c.nome AS cultura,
+       h.data,
+       h.fosforo_medio,
+       c.fosforo AS fosforo_ref_min,
+       CASE
+         WHEN h.fosforo_medio < c.fosforo THEN 'Crítico: abaixo do ideal'
+         WHEN h.fosforo_medio > c.fosforo * 1.2 THEN 'Alerta: acima do ideal'
+         ELSE 'Ok: dentro da faixa'
+       END AS status_fosforo
+FROM historico h
+JOIN solo s     ON s.id = h.solo_id
+JOIN cultura c  ON c.id = s.cultura_id
+WHERE h.data = CURDATE() AND c.nome = 'Soja';</pre>
+                    <p class="text-xs text-gray-600 mt-2">Exemplo expandido: sistema de três níveis (crítico/alerta/ok) baseado em tolerâncias de 20% sobre valores de referência da Embrapa.</p>
+                </div>
+            </div>
+            <div class="mt-8 bg-slate-50 border border-slate-200 rounded-xl p-6">
+                <h4 class="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <i data-lucide="table" class="w-4 h-4 text-slate-700"></i>
+                    Pré-visualização de dados (povoamento)
+                </h4>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-mono text-slate-800">
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="font-semibold text-gray-700 mb-2">Usuario</div>
+                        <div>id=1 · Guilherme Tavares</div>
+                        <div>email=guilherme.tavares@soilbrief.com</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="font-semibold text-gray-700 mb-2">Propriedade</div>
+                        <div>id=1 · Serra Azul</div>
+                        <div>usuario_id=1</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="font-semibold text-gray-700 mb-2">Solo</div>
+                        <div>id=1 · "Lavoura"</div>
+                        <div>cultura_id=1 (Trigo) · propriedade_id=1</div>
+                        <div>N=45.5 P=28.3 K=180.2 Umid=70.5 Temp=29°C</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3">
+                        <div class="font-semibold text-gray-700 mb-2">Cultura (amostras)</div>
+                        <div>1 Trigo · 60/45/250</div>
+                        <div>2 Milho · 80/60/300</div>
+                        <div>3 Soja · 50/40/200</div>
+                    </div>
+                    <div class="bg-white border border-gray-200 rounded-lg p-3 md:col-span-2 lg:col-span-2">
+                        <div class="font-semibold text-gray-700 mb-2">Historico (exemplos)</div>
+                        <div>2024-01-05 · NPK 52/38/210 · Umid 68 · Temp 24 · leituras 200</div>
+                        <div>2024-03-25 · NPK 59/45/228 · Umid 74 · Temp 29 · leituras 200</div>
+                        <div>2025-04-12 · NPK 63/49/240 · Umid 78 · Temp 28 · leituras 200</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Relações -->
@@ -341,7 +743,40 @@
                 <h2 class="text-2xl font-bold">8. Relações e Fluxo de Dados</h2>
                 <p class="text-gray-500 mt-2">A força de um banco de dados relacional reside nas conexões lógicas entre suas tabelas, implementadas através de chaves estrangeiras.</p>
             </div>
-            <!-- Conteúdo das relações... -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
+                    <i data-lucide="users" class="w-8 h-8 text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">Propriedade → Usuario</h4>
+                    <p class="text-xs text-gray-500">Um usuário pode possuir múltiplas propriedades, mas cada propriedade pertence a um único usuário.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
+                    <i data-lucide="map" class="w-8 h-8 text-green-600 mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">Solo → Propriedade</h4>
+                    <p class="text-xs text-gray-500">Cada área de solo monitorada está localizada em uma propriedade específica, garantindo que todos os dados possam ser rastreados até uma localização física.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
+                    <i data-lucide="link" class="w-8 h-8 text-slate-600 mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">Sensor → Solo</h4>
+                    <p class="text-xs text-gray-500">Um sensor físico está instalado em uma única área de solo para coletar dados, vinculando o hardware de campo aos registros lógicos do sistema.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
+                    <i data-lucide="history" class="w-8 h-8 text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">Historico → Solo</h4>
+                    <p class="text-xs text-gray-500">Todos os registros históricos estão diretamente vinculados à área de solo da qual os dados foram coletados, permitindo análise de tendências.</p>
+                </div>
+                <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
+                    <i data-lucide="sprout" class="w-8 h-8 text-amber-600 mb-3"></i>
+                    <h4 class="font-bold text-sm mb-1">Solo → Cultura</h4>
+                    <p class="text-xs text-gray-500">Uma área de solo pode ser associada a uma cultura. <code>cultura_id</code> nulável permite monitoramento durante períodos de pousio.</p>
+                </div>
+            </div>
+            <div class="mt-6 bg-amber-50 border border-amber-100 rounded-lg p-4 flex items-start gap-3">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-amber-600 mt-0.5"></i>
+                <div>
+                    <h5 class="font-bold text-amber-800 text-sm">Nota de Design</h5>
+                    <p class="text-amber-700 text-sm mt-1">A chave estrangeira <code>cultura_id</code> na tabela Solo é nulável, o que representa uma decisão de design deliberada. Isso confere flexibilidade ao modelo, permitindo que o sistema monitore uma área de solo mesmo quando nenhuma cultura específica está plantada (por exemplo, durante períodos de pousio).</p>
+                </div>
+            </div>
         </section>
 
         <!-- Conclusão -->

@@ -19,14 +19,14 @@ const SoilBriefApp = {
         animationDuration: 300,
         mobileBreakpoint: 768
     },
-    
+
     // Estado da aplicação
     state: {
         isMobileMenuOpen: false,
         activeSection: null,
         scrollPosition: 0
     },
-    
+
     // Inicialização
     init() {
         this.initializeComponents();
@@ -44,18 +44,18 @@ const SoilBriefApp = {
 /**
  * Inicializa todos os componentes da página
  */
-SoilBriefApp.initializeComponents = function() {
+SoilBriefApp.initializeComponents = function () {
     // Inicializar ícones do Lucide
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
-    
+
     // Configurar smooth scroll para navegação interna
     this.setupSmoothScroll();
-    
+
     // Configurar observador de seções ativas
     this.setupIntersectionObserver();
-    
+
     // Configurar tooltips (se necessário)
     this.setupTooltips();
 };
@@ -63,23 +63,23 @@ SoilBriefApp.initializeComponents = function() {
 /**
  * Configura navegação suave entre seções
  */
-SoilBriefApp.setupSmoothScroll = function() {
+SoilBriefApp.setupSmoothScroll = function () {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
+
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
-            
+
             if (targetElement) {
                 const offsetTop = targetElement.offsetTop - this.config.scrollOffset;
-                
+
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
-                
+
                 // Fechar menu mobile se estiver aberto
                 this.closeMobileMenu();
             }
@@ -90,15 +90,15 @@ SoilBriefApp.setupSmoothScroll = function() {
 /**
  * Configura observador para detectar seção ativa
  */
-SoilBriefApp.setupIntersectionObserver = function() {
+SoilBriefApp.setupIntersectionObserver = function () {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 this.state.activeSection = entry.target.id;
-                
+
                 // Atualizar link ativo na navegação
                 navLinks.forEach(link => {
                     const href = link.getAttribute('href').substring(1);
@@ -109,29 +109,29 @@ SoilBriefApp.setupIntersectionObserver = function() {
     }, {
         rootMargin: `-${this.config.scrollOffset}px 0px -70% 0px`
     });
-    
+
     sections.forEach(section => observer.observe(section));
 };
 
 /**
  * Configura menu mobile
  */
-SoilBriefApp.setupMobileMenu = function() {
-    const mobileMenuButton = document.querySelector('.md\\:hidden i[data-lucide="menu"]');
-    
-    if (mobileMenuButton) {
-        mobileMenuButton.addEventListener('click', () => {
+SoilBriefApp.setupMobileMenu = function () {
+    // Configurar evento de clique para o botão do menu
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.mobile-menu-toggle')) {
+            e.preventDefault();
             this.toggleMobileMenu();
-        });
-    }
-    
+        }
+    });
+
     // Fechar menu ao clicar fora
     document.addEventListener('click', (e) => {
-        if (this.state.isMobileMenuOpen && !e.target.closest('nav')) {
+        if (this.state.isMobileMenuOpen && !e.target.closest('nav') && !e.target.closest('.mobile-menu-overlay')) {
             this.closeMobileMenu();
         }
     });
-    
+
     // Fechar menu ao redimensionar para desktop
     window.addEventListener('resize', () => {
         if (window.innerWidth >= this.config.mobileBreakpoint) {
@@ -143,12 +143,12 @@ SoilBriefApp.setupMobileMenu = function() {
 /**
  * Alterna estado do menu mobile
  */
-SoilBriefApp.toggleMobileMenu = function() {
+SoilBriefApp.toggleMobileMenu = function () {
     this.state.isMobileMenuOpen = !this.state.isMobileMenuOpen;
-    
+
     const nav = document.querySelector('nav');
     const menuButton = document.querySelector('.md\\:hidden i[data-lucide="menu"]');
-    
+
     if (this.state.isMobileMenuOpen) {
         this.openMobileMenu(nav, menuButton);
     } else {
@@ -159,22 +159,22 @@ SoilBriefApp.toggleMobileMenu = function() {
 /**
  * Abre menu mobile
  */
-SoilBriefApp.openMobileMenu = function(nav, menuButton) {
+SoilBriefApp.openMobileMenu = function (nav, menuButton) {
     // Criar overlay do menu mobile
     const mobileMenu = this.createMobileMenuOverlay();
     document.body.appendChild(mobileMenu);
-    
+
     // Animar abertura
     setTimeout(() => {
         mobileMenu.classList.add('active');
     }, 10);
-    
+
     // Mudar ícone para X
     if (menuButton) {
         menuButton.setAttribute('data-lucide', 'x');
         lucide.createIcons();
     }
-    
+
     // Prevenir scroll do body
     document.body.style.overflow = 'hidden';
 };
@@ -182,24 +182,24 @@ SoilBriefApp.openMobileMenu = function(nav, menuButton) {
 /**
  * Fecha menu mobile
  */
-SoilBriefApp.closeMobileMenu = function(nav, menuButton) {
+SoilBriefApp.closeMobileMenu = function (nav, menuButton) {
     const mobileMenu = document.querySelector('.mobile-menu-overlay');
-    
+
     if (mobileMenu) {
         mobileMenu.classList.remove('active');
-        
+
         setTimeout(() => {
             mobileMenu.remove();
         }, this.config.animationDuration);
     }
-    
+
     // Voltar ícone para menu
     const menuBtn = menuButton || document.querySelector('.md\\:hidden i[data-lucide="x"]');
     if (menuBtn) {
         menuBtn.setAttribute('data-lucide', 'menu');
         lucide.createIcons();
     }
-    
+
     // Restaurar scroll do body
     document.body.style.overflow = '';
     this.state.isMobileMenuOpen = false;
@@ -208,7 +208,7 @@ SoilBriefApp.closeMobileMenu = function(nav, menuButton) {
 /**
  * Cria overlay do menu mobile
  */
-SoilBriefApp.createMobileMenuOverlay = function() {
+SoilBriefApp.createMobileMenuOverlay = function () {
     const overlay = document.createElement('div');
     overlay.className = 'mobile-menu-overlay';
     overlay.innerHTML = `
@@ -231,7 +231,7 @@ SoilBriefApp.createMobileMenuOverlay = function() {
             </div>
         </div>
     `;
-    
+
     // Adicionar estilos inline para o overlay
     overlay.style.cssText = `
         position: fixed;
@@ -245,7 +245,7 @@ SoilBriefApp.createMobileMenuOverlay = function() {
         opacity: 0;
         transition: opacity ${this.config.animationDuration}ms ease-in-out;
     `;
-    
+
     // Estilos para o conteúdo do menu
     const menuContent = overlay.querySelector('.mobile-menu-content');
     menuContent.style.cssText = `
@@ -261,7 +261,7 @@ SoilBriefApp.createMobileMenuOverlay = function() {
         display: flex;
         flex-direction: column;
     `;
-    
+
     // Configurar links do menu mobile
     const links = overlay.querySelectorAll('.mobile-menu-link');
     links.forEach(link => {
@@ -273,53 +273,53 @@ SoilBriefApp.createMobileMenuOverlay = function() {
             border-bottom: 1px solid #f3f4f6;
             transition: background-color 0.15s ease;
         `;
-        
+
         link.addEventListener('click', () => {
             this.closeMobileMenu();
         });
-        
+
         link.addEventListener('mouseenter', () => {
             link.style.backgroundColor = '#f9fafb';
         });
-        
+
         link.addEventListener('mouseleave', () => {
             link.style.backgroundColor = 'transparent';
         });
     });
-    
+
     // Adicionar classe ativa para animação
-    overlay.classList.add = function(className) {
+    overlay.classList.add = function (className) {
         if (className === 'active') {
             this.style.opacity = '1';
             menuContent.style.transform = 'translateX(0)';
         }
     };
-    
-    overlay.classList.remove = function(className) {
+
+    overlay.classList.remove = function (className) {
         if (className === 'active') {
             this.style.opacity = '0';
             menuContent.style.transform = 'translateX(100%)';
         }
     };
-    
+
     return overlay;
 };
 
 /**
  * Configura event listeners globais
  */
-SoilBriefApp.setupEventListeners = function() {
+SoilBriefApp.setupEventListeners = function () {
     // Monitorar posição do scroll
     window.addEventListener('scroll', () => {
         this.state.scrollPosition = window.pageYOffset;
         this.updateScrollIndicator();
     });
-    
+
     // Monitorar redimensionamento da janela
     window.addEventListener('resize', () => {
         this.handleResize();
     });
-    
+
     // Monitorar carregamento da página
     window.addEventListener('load', () => {
         this.handlePageLoad();
@@ -329,11 +329,11 @@ SoilBriefApp.setupEventListeners = function() {
 /**
  * Atualiza indicador de progresso do scroll (opcional)
  */
-SoilBriefApp.updateScrollIndicator = function() {
+SoilBriefApp.updateScrollIndicator = function () {
     const scrollTop = window.pageYOffset;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = (scrollTop / docHeight) * 100;
-    
+
     // Implementar indicador visual se necessário
     document.documentElement.style.setProperty('--scroll-progress', `${scrollPercent}%`);
 };
@@ -341,7 +341,7 @@ SoilBriefApp.updateScrollIndicator = function() {
 /**
  * Manipula redimensionamento da janela
  */
-SoilBriefApp.handleResize = function() {
+SoilBriefApp.handleResize = function () {
     // Fechar menu mobile se redimensionado para desktop
     if (window.innerWidth >= this.config.mobileBreakpoint && this.state.isMobileMenuOpen) {
         this.closeMobileMenu();
@@ -351,12 +351,12 @@ SoilBriefApp.handleResize = function() {
 /**
  * Manipula carregamento completo da página
  */
-SoilBriefApp.handlePageLoad = function() {
+SoilBriefApp.handlePageLoad = function () {
     // Verificar se há hash na URL e navegar para a seção
     if (window.location.hash) {
         const targetId = window.location.hash.substring(1);
         const targetElement = document.getElementById(targetId);
-        
+
         if (targetElement) {
             setTimeout(() => {
                 const offsetTop = targetElement.offsetTop - this.config.scrollOffset;
@@ -372,7 +372,7 @@ SoilBriefApp.handlePageLoad = function() {
 /**
  * Configura navegação principal
  */
-SoilBriefApp.setupNavigation = function() {
+SoilBriefApp.setupNavigation = function () {
     // Adicionar efeito de destaque ao link ativo
     const style = document.createElement('style');
     style.textContent = `
@@ -398,14 +398,14 @@ SoilBriefApp.setupNavigation = function() {
 /**
  * Configura tooltips (se necessário)
  */
-SoilBriefApp.setupTooltips = function() {
+SoilBriefApp.setupTooltips = function () {
     const elementsWithTooltip = document.querySelectorAll('[data-tooltip]');
-    
+
     elementsWithTooltip.forEach(element => {
         element.addEventListener('mouseenter', (e) => {
             this.showTooltip(e.target, e.target.getAttribute('data-tooltip'));
         });
-        
+
         element.addEventListener('mouseleave', () => {
             this.hideTooltip();
         });
@@ -415,7 +415,7 @@ SoilBriefApp.setupTooltips = function() {
 /**
  * Mostra tooltip
  */
-SoilBriefApp.showTooltip = function(element, text) {
+SoilBriefApp.showTooltip = function (element, text) {
     // Implementar tooltip personalizado se necessário
     element.title = text;
 };
@@ -423,7 +423,7 @@ SoilBriefApp.showTooltip = function(element, text) {
 /**
  * Oculta tooltip
  */
-SoilBriefApp.hideTooltip = function() {
+SoilBriefApp.hideTooltip = function () {
     // Implementar lógica de ocultação de tooltip personalizado
 };
 
@@ -439,7 +439,7 @@ function debounce(func, wait, immediate) {
     return function executedFunction() {
         const context = this;
         const args = arguments;
-        const later = function() {
+        const later = function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         };
@@ -455,7 +455,7 @@ function debounce(func, wait, immediate) {
  */
 function throttle(func, limit) {
     let inThrottle;
-    return function() {
+    return function () {
         const args = arguments;
         const context = this;
         if (!inThrottle) {
