@@ -38,18 +38,18 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="database" class="text-blue-600 h-6 w-6"></i>
-                    <span class="font-bold text-xl tracking-tight text-gray-900">db_soil<span class="text-gray-400 font-light">.docs</span></span>
+                    <i data-lucide="database" class="h-6 w-6" style="color: var(--color-primary);"></i>
+                    <span class="font-bold text-xl tracking-tight" style="color: var(--color-text-primary);">db_soil<span class="font-light" style="color: var(--color-text-tertiary);">.docs</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 text-sm font-medium">
-                    <a href="#intro" class="text-gray-600 hover:text-blue-600 transition">Introdução</a>
-                    <a href="#entidades" class="text-gray-600 hover:text-blue-600 transition">Modelo de Dados</a>
-                    <a href="#monitoramento" class="text-gray-600 hover:text-blue-600 transition">Monitoramento</a>
-                    <a href="#historico" class="text-gray-600 hover:text-blue-600 transition">Análise Histórica</a>
-                    <a href="#ddl" class="text-gray-600 hover:text-blue-600 transition">DDL</a>
-                    <a href="#fluxo-iot" class="text-gray-600 hover:text-blue-600 transition">Uso/IoT</a>
-                    <a href="#consultas" class="text-gray-600 hover:text-blue-600 transition">Consultas</a>
-                    <a href="#relacoes" class="text-gray-600 hover:text-blue-600 transition">Relações</a>
+                    <a href="#intro" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Introdução</a>
+                    <a href="#entidades" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Modelo de Dados</a>
+                    <a href="#monitoramento" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Monitoramento</a>
+                    <a href="#historico" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Análise Histórica</a>
+                    <a href="#ddl" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">DDL</a>
+                    <a href="#fluxo-iot" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Uso/IoT</a>
+                    <a href="#consultas" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Consultas</a>
+                    <a href="#relacoes" class="transition" style="color: var(--color-text-tertiary);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-text-tertiary)'">Relações</a>
                 </div>
                 <div class="md:hidden">
                     <button class="mobile-menu-toggle" aria-label="Abrir menu" onclick="SoilBriefApp.toggleMobileMenu()">
@@ -64,12 +64,12 @@
     <header class="bg-white border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="max-w-3xl">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold uppercase tracking-wider mb-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-6" style="background-color: var(--color-primary-lighter); color: var(--color-primary);">
                     <i data-lucide="file-text" class="w-3 h-3"></i>
                     Relatório Técnico
                 </div>
                 <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                    Estrutura do Banco de Dados <span class="text-blue-600">db_soil</span>
+                    Estrutura do Banco de Dados <span style="color: var(--color-primary);">db_soil</span>
                 </h1>
                 <p class="text-xl text-gray-500 leading-relaxed mb-8">
                     Documentação da arquitetura, design e funcionalidade do Soil Brief - Sistema Integrado de Monitoramento de Fertilidade do Solo com IoT e Aplicação Móvel.
@@ -114,7 +114,7 @@
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="bg-white rounded-xl p-8 border border-gray-200 card-shadow h-full">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
+                        <div class="p-3 rounded-lg" style="background-color: var(--color-primary-alpha); color: var(--color-primary);">
                             <i data-lucide="user" class="w-6 h-6"></i>
                         </div>
                         <span class="tech-badge">Tabela: Usuario</span>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="bg-white rounded-xl p-8 border border-gray-200 card-shadow h-full">
                     <div class="flex items-start justify-between mb-6">
-                        <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                        <div class="p-3 rounded-lg" style="background-color: var(--color-success-alpha); color: var(--color-success);">
                             <i data-lucide="map-pin" class="w-6 h-6"></i>
                         </div>
                         <span class="tech-badge">Tabela: Propriedade</span>
@@ -168,7 +168,7 @@
             <div class="grid lg:grid-cols-3 gap-6">
                 <div class="bg-white p-6 rounded-lg border border-gray-200 card-shadow h-full">
                     <div class="flex items-center gap-3 mb-4">
-                        <i data-lucide="book-open" class="text-amber-500 w-5 h-5"></i>
+                        <i data-lucide="book-open" class="w-5 h-5" style="color: var(--color-warning);"></i>
                         <h4 class="font-bold text-gray-900">1. Tabela Cultura</h4>
                     </div>
                     <p class="text-sm text-gray-600 mb-4">Funciona como uma tabela de referência, armazenando os parâmetros nutricionais e ambientais considerados ideais para diversos tipos de culturas agrícolas, baseados em referenciais da Embrapa.</p>
@@ -181,7 +181,7 @@
                         Core
                     </div>
                     <div class="flex items-center gap-3 mb-4">
-                        <i data-lucide="layers" class="text-green-600 w-5 h-5"></i>
+                        <i data-lucide="layers" class="w-5 h-5" style="color: var(--color-success);"></i>
                         <h4 class="font-bold text-gray-900">2. Tabela Solo</h4>
                     </div>
                     <p class="text-sm text-gray-600 mb-4">Esta é a entidade central do processo de monitoramento. Ela armazena as leituras atuais dos nutrientes e das condições de uma área de solo específica. Suas chaves estrangeiras contextualizam os dados. Extensibilidade para pH, condutividade, salinidade e TDS conforme tipo de sensor.</p>
@@ -205,14 +205,14 @@
                 </div>
                 <div class="bg-white p-6 rounded-lg border border-gray-200 card-shadow h-full">
                     <div class="flex items-center gap-3 mb-4">
-                        <i data-lucide="cpu" class="text-slate-500 w-5 h-5"></i>
+                        <i data-lucide="cpu" class="w-5 h-5" style="color: var(--color-text-tertiary);"></i>
                         <h4 class="font-bold text-gray-900">3. Tabela Sensor</h4>
                     </div>
                     <p class="text-sm text-gray-600 mb-4">Esta tabela estabelece o vínculo fundamental entre o mundo físico e o sistema lógico. Ela associa um dispositivo de hardware a uma área de solo específica monitorada.</p>
                     <div class="bg-gray-50 p-3 rounded text-xs font-mono text-gray-600">
                         id_sensor: identificador único do dispositivo físico (endereço Modbus 1-255)<br>
                         solo_id (FK): conecta sensor a área de solo<br>
-                        <span class="text-blue-600">Protocolos suportados:</span> Modbus RTU RS-485, registros KEEP
+                        <span style="color: var(--color-primary);">Protocolos suportados:</span> Modbus RTU RS-485, registros KEEP
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
             <div class="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-slate-800 rounded-full opacity-50 blur-3xl"></div>
             <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <div class="inline-flex items-center gap-2 text-blue-400 mb-4 font-mono text-sm">
+                    <div class="inline-flex items-center gap-2 text-xs font-mono mb-4" style="color: var(--color-primary);">
                         <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
                         4. Análise Histórica
                     </div>
@@ -287,7 +287,7 @@
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="user-round" class="w-5 h-5 text-indigo-600"></i>
+                            <i data-lucide="user-round" class="w-5 h-5" style="color: var(--color-primary);"></i>
                             <h4 class="font-bold text-gray-900">Usuario</h4>
                         </div>
                         <span class="tech-badge">PK: id</span>
@@ -315,7 +315,7 @@
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="map" class="w-5 h-5 text-emerald-600"></i>
+                            <i data-lucide="map" class="w-5 h-5" style="color: var(--color-success);"></i>
                             <h4 class="font-bold text-gray-900">Propriedade</h4>
                         </div>
                         <span class="tech-badge">FK → Usuario</span>
@@ -339,7 +339,7 @@
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="sprout" class="w-5 h-5 text-amber-600"></i>
+                            <i data-lucide="sprout" class="w-5 h-5" style="color: var(--color-warning);"></i>
                             <h4 class="font-bold text-gray-900">Cultura</h4>
                         </div>
                         <span class="tech-badge">Referências NPK</span>
@@ -379,7 +379,7 @@
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="layers" class="w-5 h-5 text-green-600"></i>
+                            <i data-lucide="layers" class="w-5 h-5" style="color: var(--color-success);"></i>
                             <h4 class="font-bold text-gray-900">Solo</h4>
                         </div>
                         <span class="tech-badge">FK → Cultura / Propriedade</span>
@@ -451,7 +451,7 @@
                 <div class="border border-gray-200 rounded-xl p-6 card-shadow lg:col-span-2 h-full">
                     <div class="flex items-center justify-between mb-4">
                         <div class="flex items-center gap-2">
-                            <i data-lucide="history" class="w-5 h-5 text-purple-600"></i>
+                            <i data-lucide="history" class="w-5 h-5" style="color: var(--color-warning);"></i>
                             <h4 class="font-bold text-gray-900">Historico</h4>
                         </div>
                         <span class="tech-badge">UNIQUE (data, solo_id)</span>
@@ -553,23 +553,23 @@
                         <div class="text-xs font-mono space-y-1 text-gray-600">
                             <div class="flex justify-between">
                                 <span>NPK Nitrogen:</span>
-                                <span class="text-blue-600">Reg 31 (Signed)</span>
+                                <span style="color: var(--color-nitrogen);">Reg 31 (Signed)</span>
                             </div>
                             <div class="flex justify-between">
                                 <span>Humidity:</span>
-                                <span class="text-green-600">Reg 1 (Signed x0.1)</span>
+                                <span style="color: var(--color-humidity);">Reg 1 (Signed x0.1)</span>
                             </div>
                             <div class="flex justify-between">
                                 <span>Temperature:</span>
-                                <span class="text-red-600">Reg 2 (Signed x0.1)</span>
+                                <span style="color: var(--color-temperature);">Reg 2 (Signed x0.1)</span>
                             </div>
                             <div class="flex justify-between">
                                 <span>pH:</span>
-                                <span class="text-purple-600">Reg 4 (Signed x0.1)</span>
+                                <span style="color: var(--color-phosphorus);">Reg 4 (Signed x0.1)</span>
                             </div>
                             <div class="flex justify-between">
                                 <span>Conductivity:</span>
-                                <span class="text-yellow-600">Reg 3 (Signed)</span>
+                                <span style="color: var(--color-potassium);">Reg 3 (Signed)</span>
                             </div>
                         </div>
                     </div>
@@ -621,7 +621,7 @@
             <div class="grid lg:grid-cols-2 gap-6 items-stretch">
                 <div class="bg-slate-900 text-slate-100 rounded-xl p-6">
                     <h4 class="text-lg font-semibold mb-3 flex items-center gap-2">
-                        <i data-lucide="workflow" class="w-4 h-4 text-blue-300"></i>
+                        <i data-lucide="workflow" class="w-4 h-4" style="color: var(--color-primary-light);"></i>
                         Fluxo resumido (dados → diagnóstico)
                     </h4>
                     <pre class="bg-slate-800 text-slate-200 p-4 rounded-lg text-xs font-mono leading-6 overflow-x-auto">Sensores Multi-parâmetro (NPK, pH, TH, EC)
@@ -639,7 +639,7 @@ Soil Brief App React Native (dashboard responsivo)</pre>
                 </div>
                 <div class="bg-white border border-gray-200 rounded-xl p-6">
                     <h4 class="text-lg font-semibold mb-3 flex items-center gap-2">
-                        <i data-lucide="list-checks" class="w-4 h-4 text-emerald-500"></i>
+                        <i data-lucide="list-checks" class="w-4 h-4" style="color: var(--color-success);"></i>
                         Pontos críticos do banco
                     </h4>
                     <ul class="space-y-3 text-sm text-gray-700">
@@ -745,27 +745,27 @@ WHERE h.data = CURDATE() AND c.nome = 'Soja';</pre>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
-                    <i data-lucide="users" class="w-8 h-8 text-blue-600 mb-3"></i>
+                    <i data-lucide="users" class="w-8 h-8 mb-3" style="color: var(--color-primary);"></i>
                     <h4 class="font-bold text-sm mb-1">Propriedade → Usuario</h4>
                     <p class="text-xs text-gray-500">Um usuário pode possuir múltiplas propriedades, mas cada propriedade pertence a um único usuário.</p>
                 </div>
                 <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
-                    <i data-lucide="map" class="w-8 h-8 text-green-600 mb-3"></i>
+                    <i data-lucide="map" class="w-8 h-8 mb-3" style="color: var(--color-success);"></i>
                     <h4 class="font-bold text-sm mb-1">Solo → Propriedade</h4>
                     <p class="text-xs text-gray-500">Cada área de solo monitorada está localizada em uma propriedade específica, garantindo que todos os dados possam ser rastreados até uma localização física.</p>
                 </div>
                 <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
-                    <i data-lucide="link" class="w-8 h-8 text-slate-600 mb-3"></i>
+                    <i data-lucide="link" class="w-8 h-8 mb-3" style="color: var(--color-text-tertiary);"></i>
                     <h4 class="font-bold text-sm mb-1">Sensor → Solo</h4>
                     <p class="text-xs text-gray-500">Um sensor físico está instalado em uma única área de solo para coletar dados, vinculando o hardware de campo aos registros lógicos do sistema.</p>
                 </div>
                 <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
-                    <i data-lucide="history" class="w-8 h-8 text-purple-600 mb-3"></i>
+                    <i data-lucide="history" class="w-8 h-8 mb-3" style="color: var(--color-warning);"></i>
                     <h4 class="font-bold text-sm mb-1">Historico → Solo</h4>
                     <p class="text-xs text-gray-500">Todos os registros históricos estão diretamente vinculados à área de solo da qual os dados foram coletados, permitindo análise de tendências.</p>
                 </div>
                 <div class="p-4 border border-gray-200 rounded-lg flex flex-col items-center text-center bg-white">
-                    <i data-lucide="sprout" class="w-8 h-8 text-amber-600 mb-3"></i>
+                    <i data-lucide="sprout" class="w-8 h-8 mb-3" style="color: var(--color-warning);"></i>
                     <h4 class="font-bold text-sm mb-1">Solo → Cultura</h4>
                     <p class="text-xs text-gray-500">Uma área de solo pode ser associada a uma cultura. <code>cultura_id</code> nulável permite monitoramento durante períodos de pousio.</p>
                 </div>
@@ -782,7 +782,7 @@ WHERE h.data = CURDATE() AND c.nome = 'Soja';</pre>
         <!-- Conclusão -->
         <section id="conclusao" class="bg-gray-900 rounded-xl p-8 text-gray-300">
             <div class="flex items-center gap-3 mb-6 border-b border-gray-800 pb-4">
-                <i data-lucide="check-circle" class="text-green-500 w-6 h-6"></i>
+                <i data-lucide="check-circle" class="w-6 h-6" style="color: var(--color-success);"></i>
                 <h2 class="text-2xl font-bold text-white">9. Conclusão</h2>
             </div>
             <div class="prose prose-invert max-w-none">

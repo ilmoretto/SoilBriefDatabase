@@ -8,14 +8,53 @@
  */
 
 /* ========================================
+   VARIÁVEIS DE CORES - PERFIL SOILBRIEF
+   ======================================== */
+
+:root {
+    /* Cores Primárias */
+    --color-primary: #3b82f6;
+    --color-primary-light: #bfdbfe;
+    --color-primary-lighter: #eff6ff;
+    --color-primary-alpha: #3b82f620;
+    
+    /* Cores de Estado */
+    --color-success: #10b981;
+    --color-success-alpha: #10b98120;
+    --color-warning: #f59e0b;
+    --color-warning-alpha: #f59e0b20;
+    --color-error: #ef4444;
+    --color-error-alpha: #ef444420;
+    
+    /* Cores de Texto */
+    --color-text-primary: #1f2937;
+    --color-text-secondary: #374151;
+    --color-text-tertiary: #6b7280;
+    --color-text-placeholder: #9ca3af;
+    
+    /* Cores de Fundo e Bordas */
+    --color-bg-base: #f9fafb;
+    --color-bg-neutral: #f3f4f6;
+    --color-bg-white: #ffffff;
+    --color-border: #e5e7eb;
+    
+    /* Cores Complementares - Métricas */
+    --color-nitrogen: #3b82f6;
+    --color-phosphorus: #f59e0b;
+    --color-potassium: #10b981;
+    --color-humidity: #06b6d4;
+    --color-temperature: #ef4444;
+}
+
+/* ========================================
    CONFIGURAÇÕES GLOBAIS E RESET
    ======================================== */
 
 /* Configuração da fonte principal */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #f8fafc;
-    color: #334155;
+    background-color: var(--color-bg-base);
+    color: var(--color-text-secondary);
 }
 
 /* Configuração de títulos */
@@ -25,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: #0f172a;
+    color: var(--color-text-primary);
 }
 
 /* Fonte monoespaçada para código */
@@ -61,7 +100,7 @@ section[id] {
     top: 0.25rem;
     bottom: 0.25rem;
     width: 4px;
-    background: #2563eb;
+    background: var(--color-primary);
     border-radius: 2px;
 }
 
@@ -81,18 +120,47 @@ section[id] {
 }
 
 /* ========================================
-   COMPONENTES DE BADGE E PILL
+   COMPONENTES DE NAVEGAÇÃO
    ======================================== */
+
+/* Navegação ativa */
+nav a.active {
+    color: var(--color-primary) !important;
+    font-weight: 600;
+    position: relative;
+}
+
+nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 1px;
+}
+
+/* Menu mobile */
+.mobile-menu-overlay {
+    background: rgba(31, 41, 55, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.mobile-menu-link:hover {
+    background-color: var(--color-primary-alpha);
+    color: var(--color-primary);
+}
 
 /* Badge para tecnologias */
 .tech-badge {
-    background-color: #f1f5f9;
-    color: #475569;
+    background-color: var(--color-bg-neutral);
+    color: var(--color-text-secondary);
     padding: 0.2rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 0.75rem;
     font-family: 'JetBrains Mono', monospace;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--color-border);
 }
 
 /* Componente pill para status/tags */
@@ -137,23 +205,23 @@ section[id] {
 
 /* Estados de cor para pills */
 .pill.status-primary {
-    background-color: #dbeafe;
-    color: #1d4ed8;
+    background-color: var(--color-primary-lighter);
+    color: var(--color-primary);
 }
 
 .pill.status-success {
-    background-color: #dcfce7;
-    color: #166534;
+    background-color: var(--color-success-alpha);
+    color: var(--color-success);
 }
 
 .pill.status-warning {
-    background-color: #fef3c7;
-    color: #92400e;
+    background-color: var(--color-warning-alpha);
+    color: var(--color-warning);
 }
 
 .pill.status-danger {
-    background-color: #fee2e2;
-    color: #dc2626;
+    background-color: var(--color-error-alpha);
+    color: var(--color-error);
 }
 
 /* ========================================
@@ -200,11 +268,11 @@ a {
 @media print {
     .card-shadow {
         box-shadow: none !important;
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--color-border);
     }
     
     .section-header::before {
-        background: #6b7280 !important;
+        background: var(--color-text-tertiary) !important;
     }
     
     /* Ocultar elementos desnecessários na impressão */
@@ -253,7 +321,7 @@ body {
 /* Foco visível para navegação por teclado */
 a:focus,
 button:focus {
-    outline: 2px solid #2563eb;
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 

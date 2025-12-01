@@ -215,8 +215,8 @@ SoilBriefApp.createMobileMenuOverlay = function () {
         <div class="mobile-menu-content">
             <div class="mobile-menu-header">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="database" class="text-blue-600 h-6 w-6"></i>
-                    <span class="font-bold text-xl tracking-tight text-gray-900">db_soil</span>
+                    <i data-lucide="database" class="h-6 w-6" style="color: var(--color-primary);"></i>
+                    <span class="font-bold text-xl tracking-tight" style="color: var(--color-text-primary);">db_soil</span>
                 </div>
             </div>
             <div class="mobile-menu-links">
